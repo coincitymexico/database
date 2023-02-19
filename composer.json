@@ -1,0 +1,40 @@
+{
+  "name": "coincitymexico/db",
+  "description": "Db",
+  "type": "library",
+  "license": "MIT",
+  "version": "v0.0.1",
+  "autoload": {
+    "files": [
+      "src/global.php"
+    ],
+    "psr-4": {
+      "Coincitymexico\\DB\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Akkudrak",
+      "email": "imendez@coincitymexico.com"
+    },
+    {
+      "name": "danidoble",
+      "email": "ddanidoble@gmail.com"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.1",
+    "ext-mysqli": "*"
+  },
+  "require-dev": {
+    "spatie/ignition": "^1.4",
+    "symfony/var-dumper": "^v6.2.5"
+  }
+}
