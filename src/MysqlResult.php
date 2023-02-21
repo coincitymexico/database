@@ -16,17 +16,17 @@ class MysqlResult
     /**
      * Query resource
      * @access private
-     * @var mysqli_result
+     * @var mysqli_result|bool
      */
-    private mysqli_result $query;
+    private mysqli_result|bool $query;
 
     /**
      * MysqlResult constructor
      * @param Mysql $mysql mysql   (instance of MySQL class)
-     * @param mysqli_result $query query (MySQL query resource)
+     * @param mysqli_result|bool $query query (MySQL query resource)
      * @access public
      */
-    function __construct(Mysql &$mysql, mysqli_result $query)
+    function __construct(Mysql &$mysql, mysqli_result|bool $query)
     {
         $this->mysql =& $mysql;
         $this->query = $query;
