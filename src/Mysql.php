@@ -112,16 +112,16 @@ class Mysql
     }
 
     /**
-     * Returns an instance of MySQLResult to fetch rows with
+     * Returns an instance of MysqlResult to fetch rows with
      * @param $sql string the database query to run
-     * @return MySQLResult
+     * @return MysqlResult
      * @access public
      * @throws Exception
      */
-    function query(string $sql): MySQLResult
+    function query(string $sql): MysqlResult
     {
         if ($queryResource = mysqli_query($this->dbConn, $sql)) {
-            return new MySQLResult($this, $queryResource);
+            return new MysqlResult($this, $queryResource);
         }
         throw new Exception('Query failed: ' . mysqli_error($this->dbConn) . ' SQL: ' . $sql);
     }

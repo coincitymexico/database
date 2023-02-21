@@ -21,7 +21,7 @@ class MysqlResult
     private mysqli_result $query;
 
     /**
-     * MySQLResult constructor
+     * MysqlResult constructor
      * @param Mysql $mysql mysql   (instance of MySQL class)
      * @param mysqli_result $query query (MySQL query resource)
      * @access public
