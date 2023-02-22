@@ -11,7 +11,7 @@ class Delete
      * @access private
      * @var string
      */
-    private string $id;
+    private string $id = '0';
 
     /**
      * @throws Exception
