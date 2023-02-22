@@ -18,6 +18,10 @@ class Update
      */
     function construct($sql): array
     {
+        if (isset($sql['custom'])) {
+            $Statement = $sql['custom'];
+            return $this->updateInfo($Statement);
+        }
         $Statement = "update ";
 
         if (isset($sql["table"])) {
@@ -92,18 +96,18 @@ class Update
         $rs_Update = Config::$db_connection->query($db_Update);
 
 //        if ($rs_Update) {
-            $File_Id = $rs_Update->insertID();
-            if (!$File_Id) {
-                $result["no"] = "95";
-                $result["type"] = "success";
-                $result["message"] = "Registro Actualizado Correctamente";
-                //$result["query"]    =$db_Update;
-            } else {
-                $result["no"] = "106";
-                $result["type"] = "error";
-                $result["message"] = "No se ha actualizado, vuelve a intentar";
-                $result["query"] = $db_Update;
-            }
+        $File_Id = $rs_Update->insertID();
+        if (!$File_Id) {
+            $result["no"] = "95";
+            $result["type"] = "success";
+            $result["message"] = "Registro Actualizado Correctamente";
+            //$result["query"]    =$db_Update;
+        } else {
+            $result["no"] = "106";
+            $result["type"] = "error";
+            $result["message"] = "No se ha actualizado, vuelve a intentar";
+            $result["query"] = $db_Update;
+        }
 
 //        } else {
 //            $result["no"] = Config::$db_connection->noError();

@@ -11,6 +11,10 @@ class Insert
      */
     function construct($sql)
     {
+        if (isset($sql['custom'])) {
+            $Statement = $sql['custom'];
+            return $this->insertInfo($Statement);
+        }
         $Statement = "insert into ";
         $values = [];
 
