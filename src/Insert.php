@@ -64,7 +64,7 @@ class Insert
         if (isset($sql['custom'])) {
             $Statement = $sql['custom'];
         }
-        $result = $this->insertInfo($Statement);
+        $result = $this->insertInfo($Statement, isset($sql["update"]));
 
 
         if ($result["no"] == "1062" && isset($sql["update"])) {
@@ -94,19 +94,43 @@ class Insert
 
     /**
      * @param $db_Insert
+     * @param bool $update
      * @return array
      * @throws Exception
      */
-    function insertInfo($db_Insert): array
+    function insertInfo($db_Insert, bool $update = false): array
     {
         if (empty(Config::$db_connection)) {
             Config::connect();
         }
 
+        if ($update) {
+            try {
+                $rs_Insert = Config::$db_connection->query($db_Insert);
 
-        $rs_Insert = Config::$db_connection->query($db_Insert);
+                $File_Id = $rs_Insert->insertID();
+                if ($File_Id > 0) {
+                    $result["no"] = "95";
+                    $result["type"] = "success";
+                    $result["message"] = "Datos Insertados Correctamente";
+                    //$result["query"]     =$db_Insert;
+                    $result["id"] = $File_Id;
+                } else {
+                    $result["no"] = "103";
+                    $result["type"] = "error";
+                    $result["message"] = "Error al insertar";
+                    //$result["query"]     =$db_Insert;
+                }
+            } catch (\Exception) {
+                $result["no"] = Config::$db_connection->noError();
+                $result["type"] = "mysql";
+                //$result["query"]     =$db_Insert;
+                $result["message"] = Config::$db_connection->isError();
+            }
+        } else {
+            $rs_Insert = Config::$db_connection->query($db_Insert);
 
-        //echo Config::$db_connection->insert_id;
+            //echo Config::$db_connection->insert_id;
 //        if ($rs_Insert) {
             $File_Id = $rs_Insert->insertID();
 
@@ -134,7 +158,7 @@ class Insert
 //            $result["message"] = Config::$db_connection->isError();
 //
 //        }
-
+        }
         Config::$db_connection = null;
         return $result;
     }
