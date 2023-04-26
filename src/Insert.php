@@ -26,6 +26,12 @@ class Insert
     {
         return $this->r;
     }
+
+    public function toArray(): ?array
+    {
+        return $this->r;
+    }
+
     /**
      * @throws Exception
      */

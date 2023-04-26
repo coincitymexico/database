@@ -26,6 +26,12 @@ class Delete
     {
         return $this->r;
     }
+
+    public function toArray(): ?array
+    {
+        return $this->r;
+    }
+
     /**
      * Mysql user's password
      * @access private
