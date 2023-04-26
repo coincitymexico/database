@@ -12,6 +12,26 @@ class Update
      * @var string
      */
     private string $id = '0';
+    protected ?array $r = [];
+
+    /**
+     * @param array|string|null $sql
+     * @throws Exception
+     */
+    public function __construct(array|string|null $sql = null)
+    {
+        if(is_array($sql)) {
+            $this->r = $this->construct($sql);
+        }
+        if(is_string($sql)) {
+            $this->r = $this->construct(['custom' => $sql]);
+        }
+    }
+
+    public function __invoke(): ?array
+    {
+        return $this->r;
+    }
 
     /**
      * @throws Exception
